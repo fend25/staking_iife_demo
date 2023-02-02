@@ -1,0 +1,20 @@
+{
+  "name": "staking_unique_demo",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup --dts",
+    "serve": "serve -p 3001"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "@unique-nft/sdk": "^0.2.5",
+    "@unique-nft/utils": "^0.3.2"
+  }
+}
