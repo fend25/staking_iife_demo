@@ -8,7 +8,7 @@ export default defineConfig({
   splitting: false,
   bundle: true,
   metafile: true,
-  sourcemap: true,
+  sourcemap: false,
   minify: true,
   clean: true,
 })
