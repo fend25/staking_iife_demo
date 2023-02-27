@@ -115,6 +115,26 @@ A `number` containing the total amount of staked tokens
 const account = await UniqueStaking.totalStaked('5CDBpcN5jAYiHtUoMmb2PhUE8WVG7xPYcbBWZuAd2MkMXgoC', 'quartz')
 ```
 
+### `stakesPerAccount`
+
+#### Overview
+
+Stores amount of stakes for an `Account`
+
+#### Arguments
+
+`totalStaked` function arguments
+
+#### Returns
+
+A `number` containing amount of stakes
+
+#### Brief example
+
+```
+const account = await UniqueStaking.stakesPerAccount('5CDBpcN5jAYiHtUoMmb2PhUE8WVG7xPYcbBWZuAd2MkMXgoC', 'quartz')
+```
+
 ### `amountCanBeStaked`
 
 #### Overview
