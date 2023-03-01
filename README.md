@@ -181,11 +181,13 @@ const account = await UniqueStaking.stake('5CDBpcN5jAYiHtUoMmb2PhUE8WVG7xPYcbBWZ
 
 #### Overview
 
-Stakes the amount of native tokens
+Unstakes all stakes.
+Moves the sum of all stakes to the `reserved` state.
+After the end of week this sum becomes completely free for further use.
 
 #### Arguments
 
-`totalStaked` function output
+`totalStaked` function arguments
 
 #### Returns
 
