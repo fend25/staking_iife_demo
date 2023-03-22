@@ -81,7 +81,7 @@ Initializing the `@unique-nft/sdk` instance
 
 #### Arguments
 
-`chainNameOrUrl: string` - network name to connect sdk from predefined (`opal`, `quartz`) or the path to network 
+`chainNameOrUrl: string` - network name to connect sdk from predefined (`opal`, `quartz`, `unique`) or the path to network 
 
 #### Returns
 
@@ -169,12 +169,42 @@ Stakes the amount of native tokens
 
 #### Returns
 
-An object of type `{ success: boolean; error?: object }` will be returned. In case of successful execution of the function, the `success` parameter will be equal to `true`. In case of unsuccessful execution of the function, the error will be in the `error` field
+An object of type `{ success: boolean; error?: object, polkadotLink: string, ... }` will be returned.
+
+In case of successful execution of the function, the `success` parameter will be equal to `true`.
+
+In case of unsuccessful execution of the function, the error will be in the `error` field
+
+The `polkadotLink` property contains links to a block with an extrinsic. 
 
 Brief example
 
 ```
 const account = await UniqueStaking.stake('5CDBpcN5jAYiHtUoMmb2PhUE8WVG7xPYcbBWZuAd2MkMXgoC', 'quartz', 100)
+```
+
+### `unstakePartial`
+
+#### Overview
+
+Unstakes the amount of balance for the staker.
+Moves the sum of all stakes to the `reserved` state.
+After the end of week this sum becomes completely free for further use.
+
+#### Arguments
+
+`totalStaked` function arguments
+
+`initAmount: number | string` - amount of unstaked funds.
+
+#### Returns
+
+`stake` function returns
+
+#### Brief example
+
+```
+const account = await UniqueStaking.unstakePartial('5CDBpcN5jAYiHtUoMmb2PhUE8WVG7xPYcbBWZuAd2MkMXgoC', 'unique', 10)
 ```
 
 ### `unstake`
