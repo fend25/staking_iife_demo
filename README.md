@@ -23,9 +23,211 @@ yarn
 yarn build
 ```
 
-Then the file `dist/index.js` will be created and can be simply copied to any static server and served with a `<script src="index.js"/>` tag.
+Then the file `dist/index.global.js` will be created and can be simply copied to any static server and served with a `<script src="index.global.js"/>` tag.
 
 The file `metafile-iife.json` is also created and can be used to get the list of all the dependencies of the `dist/index.js` file. To view the list of dependencies please use the [Bundle Buddy](https://www.bundle-buddy.com/).
+
+Include the `index.global.js` file to add the `UniqueStaking` global variable.
+
+## The `UniqueStaking` module contains the following functions
+
+### `getAccountList`
+
+#### Overview
+
+Getting a list of accounts registered in the Polkadot wallet
+
+#### Arguments
+
+none
+
+#### Returns
+
+An array of `IPolkadotExtensionAccount` objects. `IPolkadotExtensionAccount` object includes `id`, `name` and other fields.
+
+#### Brief example
+
+```
+const list = await UniqueStaking.getAccountList()
+```
+
+### `getAccountById`
+
+#### Overview
+
+Getting an account object by account id
+
+#### Arguments
+
+`accountId: string` - account id
+
+`receivedAccounts: IPolkadotExtensionAccount[]` (optional) - list of accounts
+
+#### Returns
+
+Object instance `IPolkadotExtensionAccount`
+
+#### Brief example
+
+```
+const account = await UniqueStaking.getAccountById('polkadot-js/5CDBpcN5jAYiHtUoMmb2PhUE8WVG7xPYcbBWZuAd2MkMXgoC')
+```
+
+### `initSDK`
+
+#### Overview
+
+Initializing the `@unique-nft/sdk` instance
+
+#### Arguments
+
+`chainNameOrUrl: string` - network name to connect sdk from predefined (`opal`, `quartz`, `unique`) or the path to network 
+
+#### Returns
+
+Returns an instance of the `@unique-nft/sdk` library of type `Client`
+
+#### Brief example
+
+```
+const account = UniqueStaking.initSDK('quartz')
+```
+
+### `totalStaked`
+
+#### Overview
+
+Returns the total amount of staked tokens
+
+#### Arguments
+
+`accountOrAccountIdOrAddress: IPolkadotExtensionAccount | string` - account object or account id or a Substrate address
+
+`sdkInstanceOrChainNameOrUrl: Client | string` - an instance of the `@unique-nft/sdk` library or network name or the path to network
+
+#### Returns
+
+A `number` containing the total amount of staked tokens
+
+#### Brief example
+
+```
+const account = await UniqueStaking.totalStaked('5CDBpcN5jAYiHtUoMmb2PhUE8WVG7xPYcbBWZuAd2MkMXgoC', 'quartz')
+```
+
+### `stakesPerAccount`
+
+#### Overview
+
+Stores amount of stakes for an `Account`
+
+#### Arguments
+
+`totalStaked` function arguments
+
+#### Returns
+
+A `number` containing amount of stakes
+
+#### Brief example
+
+```
+const account = await UniqueStaking.stakesPerAccount('5CDBpcN5jAYiHtUoMmb2PhUE8WVG7xPYcbBWZuAd2MkMXgoC', 'quartz')
+```
+
+### `amountCanBeStaked`
+
+#### Overview
+
+The amount of tokens available for staking
+
+#### Arguments
+
+`totalStaked` function arguments
+
+#### Returns
+
+A `number` containing the amount of tokens available for staking
+
+#### Brief example
+
+```
+const account = await UniqueStaking.amountCanBeStaked('5CDBpcN5jAYiHtUoMmb2PhUE8WVG7xPYcbBWZuAd2MkMXgoC', 'quartz')
+```
+
+### `stake`
+
+#### Overview
+
+Stakes the amount of native tokens
+
+#### Arguments
+
+`totalStaked` function arguments
+
+`initAmount: number | string` - amount of tokens to stake. Minimum stake amount is 100
+
+#### Returns
+
+An object of type `{ success: boolean; error?: object, polkadotLink: string, ... }` will be returned.
+
+In case of successful execution of the function, the `success` parameter will be equal to `true`.
+
+In case of unsuccessful execution of the function, the error will be in the `error` field
+
+The `polkadotLink` property contains links to a block with an extrinsic. 
+
+Brief example
+
+```
+const account = await UniqueStaking.stake('5CDBpcN5jAYiHtUoMmb2PhUE8WVG7xPYcbBWZuAd2MkMXgoC', 'quartz', 100)
+```
+
+### `unstakePartial`
+
+#### Overview
+
+Unstakes the amount of balance for the staker.
+Moves the sum of all stakes to the `reserved` state.
+After the end of week this sum becomes completely free for further use.
+
+#### Arguments
+
+`totalStaked` function arguments
+
+`initAmount: number | string` - amount of unstaked funds.
+
+#### Returns
+
+`stake` function returns
+
+#### Brief example
+
+```
+const account = await UniqueStaking.unstakePartial('5CDBpcN5jAYiHtUoMmb2PhUE8WVG7xPYcbBWZuAd2MkMXgoC', 'unique', 10)
+```
+
+### `unstake`
+
+#### Overview
+
+Unstakes all stakes.
+Moves the sum of all stakes to the `reserved` state.
+After the end of week this sum becomes completely free for further use.
+
+#### Arguments
+
+`totalStaked` function arguments
+
+#### Returns
+
+`stake` function returns
+
+#### Brief example
+
+```
+const account = await UniqueStaking.unstake('5CDBpcN5jAYiHtUoMmb2PhUE8WVG7xPYcbBWZuAd2MkMXgoC', 'quartz')
+```
 
 ### Run in dev mode
 
